@@ -41,7 +41,7 @@ function shareAsFile() {
     return
   }
   const v = JSON.stringify(locations)
-  const file = new File([v], 'sample.json', { type: 'text/json' })
+  const file = new File([v], 'geolocation-logs.json', { type: 'text/json' })
   navigator.share({files: [file]})
 }
 
