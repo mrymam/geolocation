@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Container, Heading } from '@chakra-ui/react'
 
 function startLogging(setLocations) {
   // navigator.geolocation.getCurrentPosition(logging)
@@ -46,25 +48,27 @@ function shareAsFile() {
 const App = () => {
   const [ls, setLocations] = useState([])
   const [started, setStarted] = useState(false)
-  return <div>
-    <h1>Logging GeoLocation!</h1>
-    <button onClick={() => {
-      if (!started) {
-        startLogging(setLocations)
-      } else {
-        endLogging()
-      }
-      setStarted(!started)
-    }} >
+  return <Container p={[4,8]}>
+    <Heading as='h2' size='xl' mb={4}>
+      Logging GeoLocation
+    </Heading>
+    <ButtonGroup gap='2' mb={4}>
+      <Button size='md' colorScheme={ started ? "red" : "blue" }  variant='solid' onClick={() => {
+        if (!started) {
+          startLogging(setLocations)
+        } else {
+          endLogging()
+        }
+        setStarted(!started)
+      }}>
+        { started ? "Stop Logging" : "Start Logging" }
+      </Button>
       {
-        started ? "Stop Logging" : "Start Logging"
+        ls.length > 0 ? <Button variant='outline' onClick={() => shareAsFile()}> 
+          Export as JSON File
+        </Button>: <></>
       }
-    </button>
-    {
-      ls.length > 0 ? <button onClick={() => shareAsFile()}>
-        Save as JSON File
-      </button>: <></>
-    }
+    </ButtonGroup>
     <div>
       {ls.map((l, i) => {
         return <p key={i} style={{wordBreak: "break-all"}}>
@@ -72,7 +76,7 @@ const App = () => {
         </p>
       })}
     </div>
-  </div>
+  </Container>
 }
 
 export default App;
