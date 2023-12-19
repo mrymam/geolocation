@@ -19,9 +19,11 @@ function logging(setLocations) {
         heading: position.coords.heading,
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
-        speed: position.coords.speeds,
+        altitudeAccuracy: position.coords.altitudeAccuracy,
+        speed: position.coords.speed,
       },
     }
+    console.log(position)
     // const v = JSON.stringify(p)
     locations = [...locations, p]
     console.log(locations)
